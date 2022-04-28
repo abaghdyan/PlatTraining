@@ -1,9 +1,8 @@
 using PlatTraining;
 
 var builder = WebApplication.CreateBuilder(args);
-//builder.Configuration
-//    .AddEnvironmentVariables();
-//    //.AddJsonFile("something.json", false, true);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -16,6 +15,8 @@ builder.Services.AddPlatDbContext(builder.Configuration.GetConnectionString("Pla
 builder.Services.AddServices();
 
 var app = builder.Build();
+
+await app.Services.MigrateDBContext();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

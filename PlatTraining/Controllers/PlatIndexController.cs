@@ -9,12 +9,12 @@ namespace PlatTraining.Controllers
     [Route("[controller]")]
     public class PlatIndexController : ControllerBase
     {
-        private readonly EnvironmentOptions _options;
+        private readonly IndexOptions _options;
         private readonly IConfiguration _configuration;
         private readonly IPlatIndexService _platIndexService;
 
         public PlatIndexController(IConfiguration configuration,
-            IOptions<EnvironmentOptions> options,
+            IOptions<IndexOptions> options,
             IPlatIndexService platIndexService)
         {
             _options = options.Value;
@@ -34,12 +34,6 @@ namespace PlatTraining.Controllers
         {
             var index = await _platIndexService.GetPlatIndixeById(id);
             return Ok(index);
-        }
-
-        [HttpGet("vtest")]
-        public IActionResult Get(string? propName = "MyProp")
-        {
-            return Ok(_configuration.GetSection(propName));
         }
 
         [HttpGet("opt")]

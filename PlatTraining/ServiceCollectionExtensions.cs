@@ -2,11 +2,11 @@
 
 namespace PlatTraining
 {
-    public static class OptionsExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<EnvironmentOptions>(configuration.GetSection(EnvironmentOptions.Section));
+            services.Configure<IndexOptions>(configuration.GetSection(IndexOptions.Section));
 
             return services;
         }

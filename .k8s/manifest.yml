@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: plattraining
+  name: plattraining
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: plattraining
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: plattraining
+    spec:
+      containers:
+      - image: docker.io/abaghdyan/plattraining:1.0
+        name: plattraining
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+          - containerPort: 80 
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: plattraining
+  labels:
+    run: plattraining
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: plattraining
+  type: NodePort
