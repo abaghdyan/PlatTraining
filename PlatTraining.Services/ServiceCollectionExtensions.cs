@@ -7,7 +7,8 @@ namespace PlatTraining
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddTransient<IPlatIndexService, PlatIndexService>();
+            services.AddScoped<IPlatIndexService, PlatIndexService>();
+            services.AddTransient<ITransientService, TransientService>();
 
             return services;
         }

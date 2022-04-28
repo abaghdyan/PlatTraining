@@ -12,14 +12,17 @@ namespace PlatTraining.Controllers
         private readonly IndexOptions _options;
         private readonly IConfiguration _configuration;
         private readonly IPlatIndexService _platIndexService;
+        private readonly ITransientService _transientService;
 
         public PlatIndexController(IConfiguration configuration,
             IOptions<IndexOptions> options,
-            IPlatIndexService platIndexService)
+            IPlatIndexService platIndexService,
+            ITransientService transientService)
         {
             _options = options.Value;
             _configuration = configuration;
             _platIndexService = platIndexService;
+            _transientService = transientService;
         }
 
         [HttpGet("All")]
@@ -28,7 +31,7 @@ namespace PlatTraining.Controllers
             var indexes = await _platIndexService.GetPlatIndixes();
             return Ok(indexes);
         }
-        
+
         [HttpGet("ById")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
@@ -40,6 +43,14 @@ namespace PlatTraining.Controllers
         public IActionResult GetOptions()
         {
             return Ok(_options);
+        }
+
+        [HttpGet("guid")]
+        public IActionResult GetGuid()
+        {
+            var guid1 = _platIndexService.GetGuid();
+            var guid2 = _transientService.GetGuidTransient();
+            return Ok($"{guid1} : {guid2}");
         }
     }
 }

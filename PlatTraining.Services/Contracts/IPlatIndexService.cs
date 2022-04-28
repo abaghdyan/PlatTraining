@@ -6,5 +6,6 @@ namespace PlatTraining.Services.Contracts
     {
         Task<List<PlatIndex>> GetPlatIndixes();
         Task<PlatIndex> GetPlatIndixeById(int id);
+        string GetGuid();
     }
 }

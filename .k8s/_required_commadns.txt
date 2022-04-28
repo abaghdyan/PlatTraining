@@ -1,0 +1,6 @@
+Build and push docker image to docker registry
+ 
+docker build -t plattraining:1.0 .
+docker login
+docker tag plattraining:1.0 abaghdyan/plattraining:1.0
+docker push abaghdyan/plattraining:1.0

@@ -10,6 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHealthChecks()
+    .AddSqlServer(builder.Configuration.GetConnectionString("PlatDb"))
+    .AddRedis(builder.Configuration.GetConnectionString("Redis"));
+
 builder.Services.AddApplicationOptions(builder.Configuration);
 builder.Services.AddPlatDbContext(builder.Configuration.GetConnectionString("PlatDb"));
 builder.Services.AddServices();
@@ -24,6 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHealthChecks("/health");
 
 app.UseHttpsRedirection();
 
