@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52279",
+      "sslPort": 44378
+    }
+  },
+  "profiles": {
+    "PlatTraining": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "PlatIndex/vtest",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MyProp": "launch-Console",
+        "EnvironmentOptions_IsInsertRequestLog": "true",
+        "EnvironmentOptions_LogBaseUrl": "my_log-url-ssss"
+      },
+      "applicationUrl": "https://localhost:7238;http://localhost:5238",
+      "dotnetRunMessages": true
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "PlatIndex/vtest",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MyProp": "launch-IIS"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/PlatIndex/vtest",
+      "publishAllPorts": true,
+      "useSSL": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MyProp": "launch-Docker"
+      }
+    }
+  }
+}
