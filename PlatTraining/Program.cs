@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using PlatTraining;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,12 +31,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHealthChecks("/health");
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseHealthChecks("/health",
+    new HealthCheckOptions
+    {
+        Predicate = _ => true,
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    })
+    .UseRouting()
+    .UseEndpoints(config => config.MapDefaultControllerRoute());
 
 app.Run();
