@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using PlatTraining.Options;
 using PlatTraining.Services.Contracts;
 
 namespace PlatTraining.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PlatIndexController : ControllerBase
@@ -12,11 +13,21 @@ namespace PlatTraining.Controllers
         private readonly IndexOptions _options;
         private readonly IPlatIndexService _platIndexService;
 
-        public PlatIndexController(IOptions<IndexOptions> options,
-            IPlatIndexService platIndexService)
+        public PlatIndexController()
         {
-            _options = options.Value;
-            _platIndexService = platIndexService;
+        }
+
+        //public PlatIndexController(IOptions<IndexOptions> options,
+        //    IPlatIndexService platIndexService)
+        //{
+        //    _options = options.Value;
+        //    _platIndexService = platIndexService;
+        //}
+
+        [HttpGet("test")]
+        public async Task<IActionResult> Test()
+        {
+            return Ok("OOOOOOkkkkkk");
         }
 
         [HttpGet("All")]

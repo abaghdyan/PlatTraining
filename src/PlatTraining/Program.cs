@@ -10,13 +10,15 @@ builder.Logging.AddConsole();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddHealthChecks()
     .AddSqlServer(builder.Configuration.GetConnectionString("PlatDb"))
     .AddRedis(builder.Configuration.GetConnectionString("Redis"));
 
 builder.Services.AddApplicationOptions(builder.Configuration);
+builder.Services.AddAuthenticationLayer(builder.Configuration);
+builder.Services.AddSwaggerLayer();
+
 builder.Services.AddPlatMasterDbContext(builder.Configuration.GetConnectionString("PlatDb"));
 builder.Services.AddServices();
 
@@ -33,6 +35,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -43,7 +48,6 @@ app.UseHealthChecks("/health",
         Predicate = _ => true,
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     })
-    .UseRouting()
     .UseEndpoints(config => config.MapDefaultControllerRoute());
 
 app.Run();
