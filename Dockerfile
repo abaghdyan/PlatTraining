@@ -7,10 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["PlatTraining/PlatTraining.csproj", "PlatTraining/"]
-RUN dotnet restore "PlatTraining/PlatTraining.csproj"
+COPY ["src/PlatTraining/PlatTraining.csproj", "src/PlatTraining/"]
+COPY ["src/PlatTraining.Services/PlatTraining.Services.csproj", "src/PlatTraining.Services/"]
+COPY ["src/PlatTraining.Dal/PlatTraining.Dal.csproj", "src/PlatTraining.Dal/"]
+RUN dotnet restore "src/PlatTraining/PlatTraining.csproj"
 COPY . .
-WORKDIR "/src/PlatTraining"
+WORKDIR "/src/src/PlatTraining"
 RUN dotnet build "PlatTraining.csproj" -c Release -o /app/build
 
 FROM build AS publish
