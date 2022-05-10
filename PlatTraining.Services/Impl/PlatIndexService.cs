@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlatTraining.Dal;
 using PlatTraining.Dal.Entities;
+using PlatTraining.Services.Contracts;
 
-namespace PlatTraining.Services.Contracts
+namespace PlatTraining.Services.Impl
 {
     public class PlatIndexService : IPlatIndexService
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlatTraining.Services.Contracts;
+using PlatTraining.Services.Impl;
 
 namespace PlatTraining
 {
@@ -8,7 +9,6 @@ namespace PlatTraining
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IPlatIndexService, PlatIndexService>();
-            services.AddTransient<ITransientService, TransientService>();
 
             return services;
         }

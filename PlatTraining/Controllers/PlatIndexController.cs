@@ -10,19 +10,13 @@ namespace PlatTraining.Controllers
     public class PlatIndexController : ControllerBase
     {
         private readonly IndexOptions _options;
-        private readonly IConfiguration _configuration;
         private readonly IPlatIndexService _platIndexService;
-        private readonly ITransientService _transientService;
 
-        public PlatIndexController(IConfiguration configuration,
-            IOptions<IndexOptions> options,
-            IPlatIndexService platIndexService,
-            ITransientService transientService)
+        public PlatIndexController(IOptions<IndexOptions> options,
+            IPlatIndexService platIndexService)
         {
             _options = options.Value;
-            _configuration = configuration;
             _platIndexService = platIndexService;
-            _transientService = transientService;
         }
 
         [HttpGet("All")]
@@ -43,14 +37,6 @@ namespace PlatTraining.Controllers
         public IActionResult GetOptions()
         {
             return Ok(_options);
-        }
-
-        [HttpGet("guid")]
-        public IActionResult GetGuid()
-        {
-            var guid1 = _platIndexService.GetGuid();
-            var guid2 = _transientService.GetGuidTransient();
-            return Ok($"{guid1} : {guid2}");
         }
     }
 }
