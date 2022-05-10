@@ -1,4 +1,4 @@
-﻿namespace PlatTraining.Dal.Entities
+﻿namespace PlatTraining.Data.Entities.Tenant
 {
     public class SomeTenantData
     {

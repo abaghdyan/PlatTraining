@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MasterUnit\Infrastructure\Migrations\" />
+    <Folder Include="TenantUnit\Infrastructure\Migrations\" />
+  </ItemGroup>
+
 </Project>

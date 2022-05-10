@@ -1,7 +1,8 @@
-﻿using PlatTraining.Services.Contracts;
+﻿using Microsoft.AspNetCore.Authorization;
+using PlatTraining.Data.Services;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Plat.Analytics.Common.AspNet.Middlewares
+namespace PlatTraining.Middlewares
 {
     public class TenantResolutionMiddlware
     {
@@ -12,10 +13,17 @@ namespace Plat.Analytics.Common.AspNet.Middlewares
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, ITokenService tokenService)
+        public async Task Invoke(HttpContext context, ITenantResolver tenantResolver)
         {
             if (context == null)
             {
+                return;
+            }
+
+            var endpoint = context.GetEndpoint();
+            if (endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null)
+            {
+                await _next(context);
                 return;
             }
 
@@ -24,7 +32,9 @@ namespace Plat.Analytics.Common.AspNet.Middlewares
 
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
-            var id = jwtSecurityToken.Claims.First(c => c.Value == "TenantId").Value;
+            var tenantId = jwtSecurityToken.Claims.First(c => c.Type.ToLower() == "tenantid").Value;
+
+            await tenantResolver.InitiateTenantHub(tenantId);
 
             await _next(context);
         }

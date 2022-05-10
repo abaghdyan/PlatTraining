@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlatTraining.Common.Contexts
+namespace PlatTraining.Data.Hubs
 {
     internal class MasterHub
     {

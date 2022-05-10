@@ -1,7 +1,7 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Plat.Analytics.Common.AspNet.Middlewares;
 using PlatTraining;
+using PlatTraining.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -17,15 +17,18 @@ builder.Services.AddHealthChecks()
     .AddRedis(builder.Configuration.GetConnectionString("Redis"));
 
 builder.Services.AddApplicationOptions(builder.Configuration);
+builder.Services.RegisterHubs();
 builder.Services.AddAuthenticationLayer(builder.Configuration);
 builder.Services.AddSwaggerLayer();
 
 builder.Services.AddPlatMasterDbContext(builder.Configuration.GetConnectionString("PlatMasterDb"));
+builder.Services.AddPlatTenantDbContext();
 builder.Services.AddServices();
 
 var app = builder.Build();
 
 await app.Services.MigratePlatMasterDbContextAsync();
+await app.Services.MigratePlatTenantDbContextAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

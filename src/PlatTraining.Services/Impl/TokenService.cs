@@ -3,8 +3,9 @@ using Microsoft.IdentityModel.Tokens;
 using PlatTraining.Services.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using PlatTraining.Services.Contracts;
 
-namespace PlatTraining.Services.Contracts
+namespace PlatTraining.Services.Impl
 {
     public class TokenService : ITokenService
     {

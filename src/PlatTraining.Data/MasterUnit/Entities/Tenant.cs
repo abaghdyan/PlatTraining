@@ -1,4 +1,4 @@
-﻿namespace PlatTraining.TenantData.Entities
+﻿namespace PlatTraining.Data.Entities.Master
 {
     public class Tenant
     {

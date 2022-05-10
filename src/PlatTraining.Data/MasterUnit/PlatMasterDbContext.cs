@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatTraining.TenantData.Entities;
+using PlatTraining.Data.Entities.Master;
+using ServiceTitan.SourceryEngine.Dal.Infrastructure.ApiDataContext.EntityConfigurations;
 
-namespace PlatTraining.Dal
+namespace PlatTraining.Data.DbContexts
 {
     public class PlatMasterDbContext : DbContext
     {
@@ -13,6 +14,7 @@ namespace PlatTraining.Dal
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new TenantConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

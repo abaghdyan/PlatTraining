@@ -11,14 +11,10 @@ namespace PlatTraining.Controllers
     {
         private readonly ISomeTenantDataService _tenantDataService;
 
-        public SomeTenantDataController()
+        public SomeTenantDataController(ISomeTenantDataService tenantDataService)
         {
+            _tenantDataService = tenantDataService;
         }
-
-        //public PlatIndexController(IPlatIndexService tenantDataService)
-        //{
-        //    _tenantDataService = tenantDataService;
-        //}
 
         [HttpGet("test")]
         public async Task<IActionResult> Test()

@@ -1,4 +1,4 @@
-﻿namespace PlatTraining.Dal
+﻿namespace PlatTraining.Data
 {
     public enum IndexState
     {
