@@ -18,7 +18,7 @@ namespace PlatTraining.Controllers
 
         [AllowAnonymous]
         [HttpGet("signin")]
-        public async Task<IActionResult> Test(string userName, string tenantId)
+        public async Task<IActionResult> SignIn(string userName, string tenantId)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(tenantId))
             {
@@ -27,6 +27,5 @@ namespace PlatTraining.Controllers
             var token = _tokenService.GenerateAccessToken(userName, tenantId);
             return Ok(token);
         }
-
     }
 }

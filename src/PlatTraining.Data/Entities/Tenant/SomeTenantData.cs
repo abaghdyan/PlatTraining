@@ -1,6 +1,6 @@
 ﻿namespace PlatTraining.Dal.Entities
 {
-    public class PlatIndex
+    public class SomeTenantData
     {
         public int Id { get; set; }
         public string Name { get; set; }

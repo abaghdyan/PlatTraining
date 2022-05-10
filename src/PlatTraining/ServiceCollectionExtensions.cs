@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using PlatTraining.Options;
 using PlatTraining.Services.Options;
 using System.Text;
 
@@ -11,8 +10,6 @@ namespace PlatTraining
     {
         public static IServiceCollection AddApplicationOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<IndexOptions>(configuration.GetSection(IndexOptions.Section));
-
             services.Configure<JwtTokenOptions>(o =>
             {
                 var section = configuration.GetSection(JwtTokenOptions.Section);

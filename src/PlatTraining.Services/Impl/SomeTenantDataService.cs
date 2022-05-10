@@ -5,24 +5,24 @@ using PlatTraining.TenantData;
 
 namespace PlatTraining.Services.Impl
 {
-    public class PlatIndexService : IPlatIndexService
+    public class SomeTenantDataService : ISomeTenantDataService
     {
         private readonly PlatTenantDbContext _dbContext;
         private readonly string _guid;
-        public PlatIndexService(PlatTenantDbContext dbContext)
+        public SomeTenantDataService(PlatTenantDbContext dbContext)
         {
             _dbContext = dbContext;
             _guid = Guid.NewGuid().ToString();
         }
 
-        public async Task<List<PlatIndex>> GetPlatIndixes()
+        public async Task<List<SomeTenantData>> GetAllDataAsync()
         {
-            return await _dbContext.Indexes.ToListAsync();
+            return await _dbContext.SomeTenantData.ToListAsync();
         }
 
-        public async Task<PlatIndex> GetPlatIndixeById(int id)
+        public async Task<SomeTenantData> GetDataByIdAsync(int id)
         {
-            return await _dbContext.Indexes.FirstOrDefaultAsync(i => i.Id == id);
+            return await _dbContext.SomeTenantData.FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public string GetGuid()

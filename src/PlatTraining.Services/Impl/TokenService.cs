@@ -9,7 +9,6 @@ namespace PlatTraining.Services.Contracts
     public class TokenService : ITokenService
     {
         private readonly JwtTokenOptions _tokenOptions;
-
         public TokenService(IOptions<JwtTokenOptions> tokenOptions)
         {
             _tokenOptions = tokenOptions.Value;

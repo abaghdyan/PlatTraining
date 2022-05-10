@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Plat.Analytics.Common.AspNet.Middlewares;
 using PlatTraining;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,7 @@ builder.Services.AddApplicationOptions(builder.Configuration);
 builder.Services.AddAuthenticationLayer(builder.Configuration);
 builder.Services.AddSwaggerLayer();
 
-builder.Services.AddPlatMasterDbContext(builder.Configuration.GetConnectionString("PlatDb"));
+builder.Services.AddPlatMasterDbContext(builder.Configuration.GetConnectionString("PlatMasterDb"));
 builder.Services.AddServices();
 
 var app = builder.Build();
@@ -39,6 +40,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<TenantResolutionMiddlware>();
 
 app.MapControllers();
 
