@@ -17,12 +17,12 @@ builder.Services.AddHealthChecks()
     .AddRedis(builder.Configuration.GetConnectionString("Redis"));
 
 builder.Services.AddApplicationOptions(builder.Configuration);
-builder.Services.AddPlatDbContext(builder.Configuration.GetConnectionString("PlatDb"));
+builder.Services.AddPlatMasterDbContext(builder.Configuration.GetConnectionString("PlatDb"));
 builder.Services.AddServices();
 
 var app = builder.Build();
 
-await app.Services.MigrateDBContext();
+await app.Services.MigratePlatMasterDbContextAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

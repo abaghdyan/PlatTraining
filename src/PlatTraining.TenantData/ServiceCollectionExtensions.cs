@@ -8,7 +8,7 @@ namespace PlatTraining
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddPlatDbContext(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddPlatTenantDbContext(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<PlatTenantDbContext>(options =>
                     options.UseSqlServer(connectionString));

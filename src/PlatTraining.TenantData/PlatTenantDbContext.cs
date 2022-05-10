@@ -9,7 +9,7 @@ namespace PlatTraining.TenantData
         {
         }
 
-        public DbSet<PlatIndex> PlatIndexes { get; set; }
+        public DbSet<PlatIndex> Indexes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

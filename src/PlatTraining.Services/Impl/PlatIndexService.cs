@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatTraining.Dal;
 using PlatTraining.Dal.Entities;
 using PlatTraining.Services.Contracts;
+using PlatTraining.TenantData;
 
 namespace PlatTraining.Services.Impl
 {
     public class PlatIndexService : IPlatIndexService
     {
-        private readonly PlatMasterDbContext _dbContext;
+        private readonly PlatTenantDbContext _dbContext;
         private readonly string _guid;
-        public PlatIndexService(PlatMasterDbContext dbContext)
+        public PlatIndexService(PlatTenantDbContext dbContext)
         {
             _dbContext = dbContext;
             _guid = Guid.NewGuid().ToString();

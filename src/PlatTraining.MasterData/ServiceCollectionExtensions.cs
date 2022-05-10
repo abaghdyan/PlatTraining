@@ -8,7 +8,7 @@ namespace PlatTraining
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddPlatDbContext(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddPlatMasterDbContext(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<PlatMasterDbContext>(options =>
                     options.UseSqlServer(connectionString));
@@ -16,7 +16,7 @@ namespace PlatTraining
             return services;
         }
 
-        public static async Task MigrateDBContextAsync(this IServiceProvider provider)
+        public static async Task MigratePlatMasterDbContextAsync(this IServiceProvider provider)
         {
             using var serviceScope = provider.CreateScope();
             var dbCOntext = serviceScope.ServiceProvider.GetRequiredService<PlatMasterDbContext>();
