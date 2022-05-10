@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PlatTraining.Dal;
+using PlatTraining.TenantData;
 using System.Diagnostics;
 
 namespace PlatTraining
@@ -10,17 +10,17 @@ namespace PlatTraining
     {
         public static IServiceCollection AddPlatDbContext(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<PlatDbContext>(options =>
+            services.AddDbContext<PlatTenantDbContext>(options =>
                     options.UseSqlServer(connectionString));
 
             return services;
         }
 
-        public static async Task MigrateDBContext(this IServiceProvider provider)
+        public static async Task MigratePlatTenantDbContextAsync(this IServiceProvider provider)
         {
             using var serviceScope = provider.CreateScope();
-            var dbCOntext = serviceScope.ServiceProvider.GetRequiredService<PlatDbContext>();
-            var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<PlatDbContext>>();
+            var dbCOntext = serviceScope.ServiceProvider.GetRequiredService<PlatTenantDbContext>();
+            var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<PlatTenantDbContext>>();
             var migrationTime = new Stopwatch();
             logger.LogInformation("Migration started");
             migrationTime.Start();

@@ -7,9 +7,9 @@ namespace PlatTraining.Services.Impl
 {
     public class PlatIndexService : IPlatIndexService
     {
-        private readonly PlatDbContext _dbContext;
+        private readonly PlatMasterDbContext _dbContext;
         private readonly string _guid;
-        public PlatIndexService(PlatDbContext dbContext)
+        public PlatIndexService(PlatMasterDbContext dbContext)
         {
             _dbContext = dbContext;
             _guid = Guid.NewGuid().ToString();

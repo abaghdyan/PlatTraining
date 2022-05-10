@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatTraining.Dal.Entities;
+using PlatTraining.TenantData.Entities;
 
 namespace PlatTraining.Dal
 {
-    public class PlatDbContext : DbContext
+    public class PlatMasterDbContext : DbContext
     {
-        public PlatDbContext(DbContextOptions<PlatDbContext> options) : base(options)
+        public PlatMasterDbContext(DbContextOptions<PlatMasterDbContext> options) : base(options)
         {
         }
 
-        public DbSet<PlatIndex> Indexes{ get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

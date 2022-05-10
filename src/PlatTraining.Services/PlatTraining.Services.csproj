@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlatTraining.Dal\PlatTraining.Dal.csproj" />
+    <ProjectReference Include="..\PlatTraining.MasterData\PlatTraining.MasterData.csproj" />
+    <ProjectReference Include="..\PlatTraining.TenantData\PlatTraining.TenantData.csproj" />
   </ItemGroup>
 
 </Project>
