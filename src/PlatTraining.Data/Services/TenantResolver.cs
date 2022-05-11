@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlatTraining.Data.DbContexts;
+using PlatTraining.Data.Helpers;
 using PlatTraining.Data.Hubs;
 
 namespace PlatTraining.Data.Services
@@ -8,6 +9,7 @@ namespace PlatTraining.Data.Services
     {
         private readonly TenantHub _tenantHub;
         private readonly PlatMasterDbContext _masterDbContext;
+
         public TenantResolver(TenantHub tenantHub, PlatMasterDbContext masterDbContext)
         {
             _tenantHub = tenantHub;
@@ -16,8 +18,12 @@ namespace PlatTraining.Data.Services
 
         public async Task InitiateTenantHub(string tenantId)
         {
-            var tenant = await _masterDbContext.Tenants.FirstOrDefaultAsync(t => t.Id == tenantId);
-            _tenantHub.InitiateForScope(tenant.Id, tenant.Name, tenant.ConnectionString);
+            var tenant = await _masterDbContext.Tenants
+                .Include(t => t.TenantConnectionInfo)
+                .FirstOrDefaultAsync(t => t.Id == tenantId);
+
+            _tenantHub.InitiateForScope(tenant.Id, tenant.Name,
+                ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo));
         }
     }
 }

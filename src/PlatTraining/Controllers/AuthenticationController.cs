@@ -18,7 +18,7 @@ namespace PlatTraining.Controllers
 
         [AllowAnonymous]
         [HttpGet("signin")]
-        public async Task<IActionResult> SignIn(string userName, string tenantId)
+        public IActionResult SignIn(string userName, string tenantId)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(tenantId))
             {

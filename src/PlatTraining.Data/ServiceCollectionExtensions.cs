@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PlatTraining.Data.DbContexts;
+using PlatTraining.Data.Helpers;
 using PlatTraining.Data.Hubs;
 using System.Diagnostics;
 
@@ -31,10 +32,12 @@ namespace PlatTraining
             var migrationTime = new Stopwatch();
             logger.LogInformation("Migration started");
             migrationTime.Start();
-            var tenants = await masterDbContext.Tenants.ToListAsync();
+            var tenants = await masterDbContext.Tenants.Include(t => t.TenantConnectionInfo).ToListAsync();
             foreach (var tenant in tenants)
             {
-                var tenantDbContext = PlatTenantDbContext.CreatePlatTenantDbContext(tenant.ConnectionString); ;
+                var tenantHub = new TenantHub().InitiateForScope(tenant.Id, tenant.Name,
+                    ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo));
+                var tenantDbContext = PlatTenantDbContext.CreatePlatTenantDbContext(tenantHub);
                 await tenantDbContext.Database.MigrateAsync();
             }
             migrationTime.Stop();

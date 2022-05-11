@@ -9,19 +9,14 @@ namespace PlatTraining.Data.DbContexts
     {
         private readonly TenantHub _tenantHub;
 
-        //public PlatTenantDbContext(DbContextOptions<PlatMasterDbContext> options) : base(options)
-        //{
-        //}
-
         public PlatTenantDbContext(TenantHub tenantContext)
         {
             _tenantHub = tenantContext;
         }
 
-        public static PlatTenantDbContext CreatePlatTenantDbContext(string connectionString)
+        public static PlatTenantDbContext CreatePlatTenantDbContext(TenantHub tenantHub)
         {
-            //return default;
-            return new PlatTenantDbContext(new TenantHub { ConnectionString = connectionString });
+            return new PlatTenantDbContext(tenantHub);
         }
 
         public DbSet<SomeTenantData> SomeTenantData { get; set; }

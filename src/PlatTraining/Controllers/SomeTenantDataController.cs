@@ -17,9 +17,9 @@ namespace PlatTraining.Controllers
         }
 
         [HttpGet("test")]
-        public async Task<IActionResult> Test()
+        public IActionResult Test()
         {
-            return Ok("OOOOOOkkkkkk");
+            return Ok("Everyting is OK...");
         }
 
         [HttpGet("All")]
