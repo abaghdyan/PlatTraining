@@ -22,6 +22,11 @@ namespace PlatTraining.Data.Services
                 .Include(t => t.TenantConnectionInfo)
                 .FirstOrDefaultAsync(t => t.Id == tenantId);
 
+            if (tenant == null)
+            {
+                throw new ArgumentNullException($"Tenant with {tenantId} Id was not found.");
+            }
+
             _tenantHub.InitiateForScope(tenant.Id, tenant.Name,
                 ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo));
         }

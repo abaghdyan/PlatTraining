@@ -28,7 +28,7 @@ builder.Services.AddServices();
 var app = builder.Build();
 
 await app.Services.MigratePlatMasterDbContextAsync();
-await app.Services.MigratePlatTenantDbContextAsync();
+//await app.Services.MigratePlatTenantDbContextAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

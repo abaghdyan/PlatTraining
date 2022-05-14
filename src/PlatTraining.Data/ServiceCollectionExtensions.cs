@@ -19,6 +19,14 @@ namespace PlatTraining
 
         public static IServiceCollection AddPlatTenantDbContext(this IServiceCollection services)
         {
+            //var tenant88 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=88tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //var tenant99 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=99tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //
+            //services.AddDbContext<PlatTenantDbContext>(options =>
+            //{
+            //    options.UseSqlServer(tenant88);
+            //});
+
             services.AddDbContext<PlatTenantDbContext>();
 
             return services;

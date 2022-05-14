@@ -9,14 +9,23 @@ namespace PlatTraining.Data.DbContexts
     {
         private readonly TenantHub _tenantHub;
 
-        public PlatTenantDbContext(TenantHub tenantContext)
+
+        //public PlatTenantDbContext(DbContextOptions<PlatTenantDbContext> options) : base(options)
+        //{
+        //}
+        //
+        //public static PlatTenantDbContext CreatePlatTenantDbContext(TenantHub tenantHub)
+        //{
+        //    return new PlatTenantDbContext(default);
+        //}
+
+        public PlatTenantDbContext()
         {
-            _tenantHub = tenantContext;
         }
 
         public static PlatTenantDbContext CreatePlatTenantDbContext(TenantHub tenantHub)
         {
-            return new PlatTenantDbContext(tenantHub);
+            return new PlatTenantDbContext();
         }
 
         public DbSet<SomeTenantData> SomeTenantData { get; set; }
@@ -25,7 +34,7 @@ namespace PlatTraining.Data.DbContexts
         {
             var tenant88 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=88tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             var tenant99 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=99tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            optionsBuilder.UseSqlServer(_tenantHub.ConnectionString);
+            optionsBuilder.UseSqlServer(tenant88);
             base.OnConfiguring(optionsBuilder);
         }
 
