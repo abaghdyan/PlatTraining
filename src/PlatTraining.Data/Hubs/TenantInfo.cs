@@ -2,20 +2,20 @@
 
 namespace PlatTraining.Data.Hubs
 {
-    public class TenantHub
+    public class TenantInfo
     {
         public string TenantId { get; private set; }
         public string TenantName { get; private set; }
         public string ConnectionString { get; private set; }
 
-        public TenantHub()
+        public TenantInfo()
         {
             TenantId = string.Empty;
             TenantName = string.Empty;
             ConnectionString = Guid.NewGuid().ToString();
         }
 
-        internal TenantHub InitiateForScope(string tenantId, string tenantName, SqlConnectionStringBuilder connectionBuilder)
+        internal TenantInfo InitiateForScope(string tenantId, string tenantName, SqlConnectionStringBuilder connectionBuilder)
         {
             TenantId = tenantId;
             TenantName = tenantName;

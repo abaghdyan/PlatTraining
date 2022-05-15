@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using PlatTraining.Data.Constants;
 using PlatTraining.Data.Services;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -28,13 +29,18 @@ namespace PlatTraining.Middlewares
             }
 
             string authHeader = context.Request?.Headers["Authorization"];
-            var token = authHeader.Replace("Bearer ", "").Replace("bearer ", "");
+            var token = authHeader.Replace("Bearer ", string.Empty).Replace("bearer ", string.Empty);
 
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
-            var tenantId = jwtSecurityToken.Claims.First(c => c.Type.ToLower() == "tenantid").Value;
+            var tenantClaim = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ApplicationClaims.TenantId);
 
-            await tenantResolver.InitiateTenantHub(tenantId);
+            if (tenantClaim == null)
+            {
+                throw new ArgumentNullException($"Tenant was not found during.");
+            }
+
+            await tenantResolver.InitiateTenantInfo(tenantClaim.Value);
 
             await _next(context);
         }

@@ -2,6 +2,6 @@
 {
     public interface ITenantResolver
     {
-        Task InitiateTenantHub(string tenantId);
+        Task InitiateTenantInfo(string tenantId);
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using PlatTraining.Data.Constants;
+using PlatTraining.Services.Contracts;
 using PlatTraining.Services.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using PlatTraining.Services.Contracts;
 
 namespace PlatTraining.Services.Impl
 {
@@ -20,7 +21,7 @@ namespace PlatTraining.Services.Impl
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, userName),
-                new Claim("TenantId", tenantId),
+                new Claim(ApplicationClaims.TenantId, tenantId),
             };
 
             var key = new SymmetricSecurityKey(_tokenOptions.Secret);

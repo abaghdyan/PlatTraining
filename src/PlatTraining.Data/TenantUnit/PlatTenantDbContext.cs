@@ -7,33 +7,34 @@ namespace PlatTraining.Data.DbContexts
 {
     public class PlatTenantDbContext : DbContext
     {
-        private readonly TenantHub _tenantHub;
+        private readonly TenantInfo _tenantInfp;
 
 
         //public PlatTenantDbContext(DbContextOptions<PlatTenantDbContext> options) : base(options)
         //{
         //}
         //
-        //public static PlatTenantDbContext CreatePlatTenantDbContext(TenantHub tenantHub)
+        //public static PlatTenantDbContext CreatePlatTenantDbContext(TenantInfo _tenantInfp)
         //{
         //    return new PlatTenantDbContext(default);
         //}
 
-        public PlatTenantDbContext()
+        public PlatTenantDbContext(TenantInfo tenantInfo)
         {
+            _tenantInfp = tenantInfo;
         }
 
-        public static PlatTenantDbContext CreatePlatTenantDbContext(TenantHub tenantHub)
+        public static PlatTenantDbContext CreatePlatTenantDbContext(TenantInfo tenantInfo)
         {
-            return new PlatTenantDbContext();
+            return new PlatTenantDbContext(tenantInfo);
         }
 
         public DbSet<SomeTenantData> SomeTenantData { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var tenant88 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=88tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            var tenant99 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=99tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var tenant88 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=88tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Pooling=true;Connection Lifetime=500";
+            var tenant99 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=99tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Pooling=true;Connection Lifetime=500";
             optionsBuilder.UseSqlServer(tenant88);
             base.OnConfiguring(optionsBuilder);
         }

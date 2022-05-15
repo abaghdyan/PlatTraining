@@ -7,16 +7,16 @@ namespace PlatTraining.Data.Services
 {
     public class TenantResolver : ITenantResolver
     {
-        private readonly TenantHub _tenantHub;
+        private readonly TenantInfo _tenantInfo;
         private readonly PlatMasterDbContext _masterDbContext;
 
-        public TenantResolver(TenantHub tenantHub, PlatMasterDbContext masterDbContext)
+        public TenantResolver(TenantInfo tenantInfo, PlatMasterDbContext masterDbContext)
         {
-            _tenantHub = tenantHub;
+            _tenantInfo = tenantInfo;
             _masterDbContext = masterDbContext;
         }
 
-        public async Task InitiateTenantHub(string tenantId)
+        public async Task InitiateTenantInfo(string tenantId)
         {
             var tenant = await _masterDbContext.Tenants
                 .Include(t => t.TenantConnectionInfo)
@@ -27,7 +27,7 @@ namespace PlatTraining.Data.Services
                 throw new ArgumentNullException($"Tenant with {tenantId} Id was not found.");
             }
 
-            _tenantHub.InitiateForScope(tenant.Id, tenant.Name,
+            _tenantInfo.InitiateForScope(tenant.Id, tenant.Name,
                 ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo));
         }
     }

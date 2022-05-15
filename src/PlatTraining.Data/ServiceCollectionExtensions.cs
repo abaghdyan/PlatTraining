@@ -13,7 +13,7 @@ namespace PlatTraining
         public static IServiceCollection RegisterHubs(this IServiceCollection services)
         {
             services.AddScoped<MasterHub>();
-            services.AddScoped<TenantHub>();
+            services.AddScoped<TenantInfo>();
             return services;
         }
 
@@ -43,9 +43,9 @@ namespace PlatTraining
             var tenants = await masterDbContext.Tenants.Include(t => t.TenantConnectionInfo).ToListAsync();
             foreach (var tenant in tenants)
             {
-                var tenantHub = new TenantHub().InitiateForScope(tenant.Id, tenant.Name,
+                var tenantInfo = new TenantInfo().InitiateForScope(tenant.Id, tenant.Name,
                     ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo));
-                var tenantDbContext = PlatTenantDbContext.CreatePlatTenantDbContext(tenantHub);
+                var tenantDbContext = PlatTenantDbContext.CreatePlatTenantDbContext(tenantInfo);
                 await tenantDbContext.Database.MigrateAsync();
             }
             migrationTime.Stop();
