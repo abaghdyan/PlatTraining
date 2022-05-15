@@ -1,19 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PlatTraining.Data.DbContexts;
 using PlatTraining.Data.Helpers;
-using PlatTraining.Data.Hubs;
+using PlatTraining.Data.MasterUnit;
+using PlatTraining.Data.Models;
+using PlatTraining.Data.Services;
+using PlatTraining.Data.TenantUnit;
 using System.Diagnostics;
 
 namespace PlatTraining
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection RegisterHubs(this IServiceCollection services)
+        public static IServiceCollection AddMultitenancy(this IServiceCollection services)
         {
-            services.AddScoped<MasterHub>();
             services.AddScoped<TenantInfo>();
+            services.AddScoped<ITenantResolver, TenantResolver>();
+
             return services;
         }
 

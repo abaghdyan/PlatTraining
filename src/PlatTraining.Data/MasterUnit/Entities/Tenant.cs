@@ -1,6 +1,6 @@
 ﻿using PlatTraining.Data.MasterUnit.Entities;
 
-namespace PlatTraining.Data.Entities.Master
+namespace PlatTraining.Data.MasterUnit.Entities
 {
     public class Tenant
     {

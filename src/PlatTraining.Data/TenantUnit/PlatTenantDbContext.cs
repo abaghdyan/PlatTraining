@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatTraining.Data.Entities.Tenant;
-using PlatTraining.Data.Hubs;
-using ServiceTitan.SourceryEngine.Dal.Infrastructure.ApiDataContext.EntityConfigurations;
+using PlatTraining.Data.Models;
+using PlatTraining.Data.TenantUnit.Entities;
+using PlatTraining.Data.TenantUnit.Infrastructure.EntityConfigurations;
+using PlatTraining.Data.TenantUnit;
 
-namespace PlatTraining.Data.DbContexts
+namespace PlatTraining.Data.TenantUnit
 {
     public class PlatTenantDbContext : DbContext
     {

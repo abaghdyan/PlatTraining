@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatTraining.Data.DbContexts;
-using PlatTraining.Data.Entities.Tenant;
 using PlatTraining.Services.Contracts;
+using PlatTraining.Data.TenantUnit.Entities;
+using PlatTraining.Data.TenantUnit;
 
 namespace PlatTraining.Services.Impl
 {

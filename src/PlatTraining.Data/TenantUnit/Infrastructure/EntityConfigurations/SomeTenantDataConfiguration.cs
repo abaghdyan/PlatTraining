@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PlatTraining.Data.Entities.Tenant;
+using PlatTraining.Data.TenantUnit.Entities;
 
-namespace ServiceTitan.SourceryEngine.Dal.Infrastructure.ApiDataContext.EntityConfigurations
+namespace PlatTraining.Data.TenantUnit.Infrastructure.EntityConfigurations
 {
     internal class SomeTenantDataConfiguration : IEntityTypeConfiguration<SomeTenantData>
     {

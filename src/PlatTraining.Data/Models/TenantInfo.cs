@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace PlatTraining.Data.Hubs
+namespace PlatTraining.Data.Models
 {
     public class TenantInfo
     {

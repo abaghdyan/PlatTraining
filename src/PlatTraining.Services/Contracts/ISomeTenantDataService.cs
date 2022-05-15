@@ -1,4 +1,4 @@
-﻿using PlatTraining.Data.Entities.Tenant;
+﻿using PlatTraining.Data.TenantUnit.Entities;
 
 namespace PlatTraining.Services.Contracts
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatTraining.Data.DbContexts;
 using PlatTraining.Data.Helpers;
-using PlatTraining.Data.Hubs;
+using PlatTraining.Data.MasterUnit;
+using PlatTraining.Data.Models;
 
 namespace PlatTraining.Data.Services
 {

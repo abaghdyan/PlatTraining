@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatTraining.Data.Entities.Master;
 using PlatTraining.Data.MasterUnit.Entities;
-using ServiceTitan.SourceryEngine.Dal.Infrastructure.ApiDataContext.EntityConfigurations;
+using PlatTraining.Data.MasterUnit.Infrastructure.EntityConfigurations;
+using PlatTraining.Data.MasterUnit;
 
-namespace PlatTraining.Data.DbContexts
+namespace PlatTraining.Data.MasterUnit
 {
     public class PlatMasterDbContext : DbContext
     {

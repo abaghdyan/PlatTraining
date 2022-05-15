@@ -1,4 +1,4 @@
-﻿using PlatTraining.Data.Entities.Master;
+﻿using PlatTraining.Data.MasterUnit.Entities;
 
 namespace PlatTraining.Data.MasterUnit.Entities
 {

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PlatTraining.Data.MasterUnit.Entities;
 
-namespace ServiceTitan.SourceryEngine.Dal.Infrastructure.ApiDataContext.EntityConfigurations
+namespace PlatTraining.Data.MasterUnit.Infrastructure.EntityConfigurations
 {
     internal class TenantConnectionInfoConfiguration : IEntityTypeConfiguration<TenantConnectionInfo>
     {
