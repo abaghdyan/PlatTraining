@@ -5,9 +5,9 @@ using PlatTraining.Data.MasterUnit;
 
 namespace PlatTraining.Data.MasterUnit
 {
-    public class PlatMasterDbContext : DbContext
+    public class MasterDbContext : DbContext
     {
-        public PlatMasterDbContext(DbContextOptions<PlatMasterDbContext> options) : base(options)
+        public MasterDbContext(DbContextOptions<MasterDbContext> options) : base(options)
         {
         }
 

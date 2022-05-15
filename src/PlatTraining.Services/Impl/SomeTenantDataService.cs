@@ -7,9 +7,9 @@ namespace PlatTraining.Services.Impl
 {
     public class SomeTenantDataService : ISomeTenantDataService
     {
-        private readonly PlatTenantDbContext _dbContext;
+        private readonly TenantDbContext _dbContext;
         private readonly string _guid;
-        public SomeTenantDataService(PlatTenantDbContext dbContext)
+        public SomeTenantDataService(TenantDbContext dbContext)
         {
             _dbContext = dbContext;
             _guid = Guid.NewGuid().ToString();

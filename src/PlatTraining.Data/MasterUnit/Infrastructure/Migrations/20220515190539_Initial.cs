@@ -33,10 +33,14 @@ namespace PlatTraining.Data.MasterUnit.Infrastructure.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DataSource = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InitialCatalog = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Encrypt = table.Column<bool>(type: "bit", nullable: false),
-                    TrustServerCertificate = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoadBalanceTimeoutInSec = table.Column<int>(type: "int", nullable: false),
+                    MinPoolSize = table.Column<int>(type: "int", nullable: false),
+                    MaxPoolSize = table.Column<int>(type: "int", nullable: false),
+                    Pooling = table.Column<bool>(type: "bit", nullable: false),
+                    Encrypt = table.Column<bool>(type: "bit", nullable: false),
+                    TrustServerCertificate = table.Column<bool>(type: "bit", nullable: false),
                     TenantId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>

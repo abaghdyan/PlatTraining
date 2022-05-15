@@ -10,8 +10,8 @@ using PlatTraining.Data.MasterUnit;
 
 namespace PlatTraining.Data.MasterUnit.Infrastructure.Migrations
 {
-    [DbContext(typeof(PlatMasterDbContext))]
-    partial class PlatMasterDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MasterDbContext))]
+    partial class MasterDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace PlatTraining.Data.MasterUnit.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PlatTraining.Data.Entities.Master.Tenant", b =>
+            modelBuilder.Entity("PlatTraining.Data.MasterUnit.Entities.Tenant", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -70,8 +70,20 @@ namespace PlatTraining.Data.MasterUnit.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("LoadBalanceTimeoutInSec")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxPoolSize")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinPoolSize")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Pooling")
+                        .HasColumnType("bit");
 
                     b.Property<string>("TenantId")
                         .IsRequired()
@@ -94,7 +106,7 @@ namespace PlatTraining.Data.MasterUnit.Infrastructure.Migrations
 
             modelBuilder.Entity("PlatTraining.Data.MasterUnit.Entities.TenantConnectionInfo", b =>
                 {
-                    b.HasOne("PlatTraining.Data.Entities.Master.Tenant", "Tenant")
+                    b.HasOne("PlatTraining.Data.MasterUnit.Entities.Tenant", "Tenant")
                         .WithOne("TenantConnectionInfo")
                         .HasForeignKey("PlatTraining.Data.MasterUnit.Entities.TenantConnectionInfo", "TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -103,7 +115,7 @@ namespace PlatTraining.Data.MasterUnit.Infrastructure.Migrations
                     b.Navigation("Tenant");
                 });
 
-            modelBuilder.Entity("PlatTraining.Data.Entities.Master.Tenant", b =>
+            modelBuilder.Entity("PlatTraining.Data.MasterUnit.Entities.Tenant", b =>
                 {
                     b.Navigation("TenantConnectionInfo")
                         .IsRequired();

@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using PlatTraining;
 using PlatTraining.Middlewares;
 using PlatTraining.Services;
 
@@ -21,14 +22,16 @@ builder.Services.AddMultitenancy();
 builder.Services.AddAuthenticationLayer(builder.Configuration);
 builder.Services.AddSwaggerLayer();
 
-builder.Services.AddPlatMasterDbContext(builder.Configuration.GetConnectionString("PlatMasterDb"));
-builder.Services.AddPlatTenantDbContext();
+builder.Services.AddMasterDbContext(builder.Configuration.GetConnectionString("MasterDb"));
+builder.Services.AddTenantDbContext();
 builder.Services.AddServices();
 
 var app = builder.Build();
 
-await app.Services.MigratePlatMasterDbContextAsync();
-//await app.Services.MigratePlatTenantDbContextAsync();
+await app.Services.MigrateMasterDbContextAsync();
+await app.Services.AddMasterSampleDataAsync();
+await app.Services.MigrateTenantDbContextAsync();
+await app.Services.AddTenantSampleDataAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

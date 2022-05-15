@@ -10,8 +10,8 @@ using PlatTraining.Data.TenantUnit;
 
 namespace PlatTraining.Data.TenantUnit.Infrastructure.Migrations
 {
-    [DbContext(typeof(PlatTenantDbContext))]
-    [Migration("20220511201406_Initial")]
+    [DbContext(typeof(TenantDbContext))]
+    [Migration("20220515190556_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace PlatTraining.Data.TenantUnit.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PlatTraining.Data.Entities.Tenant.SomeTenantData", b =>
+            modelBuilder.Entity("PlatTraining.Data.TenantUnit.Entities.SomeTenantData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,15 +31,15 @@ namespace PlatTraining.Data.TenantUnit.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");

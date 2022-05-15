@@ -13,8 +13,12 @@ namespace PlatTraining.Data.Helpers
                 InitialCatalog = connectionInfo.InitialCatalog,
                 Encrypt = connectionInfo.Encrypt,
                 TrustServerCertificate = connectionInfo.TrustServerCertificate,
-                UserID = connectionInfo.UserId,
-                Password = connectionInfo.Password
+                UserID = connectionInfo.UserId ?? string.Empty,
+                Password = connectionInfo.Password ?? string.Empty,
+                LoadBalanceTimeout = connectionInfo.LoadBalanceTimeoutInSec,
+                Pooling = connectionInfo.Pooling,
+                MinPoolSize = connectionInfo.MinPoolSize,
+                MaxPoolSize = connectionInfo.MaxPoolSize,
             };
         }
     }

@@ -2,13 +2,12 @@
 using PlatTraining.Data.Models;
 using PlatTraining.Data.TenantUnit.Entities;
 using PlatTraining.Data.TenantUnit.Infrastructure.EntityConfigurations;
-using PlatTraining.Data.TenantUnit;
 
 namespace PlatTraining.Data.TenantUnit
 {
-    public class PlatTenantDbContext : DbContext
+    public class TenantDbContext : DbContext
     {
-        private readonly TenantInfo _tenantInfp;
+        private readonly TenantInfo _tenantInfo;
 
 
         //public PlatTenantDbContext(DbContextOptions<PlatTenantDbContext> options) : base(options)
@@ -20,14 +19,14 @@ namespace PlatTraining.Data.TenantUnit
         //    return new PlatTenantDbContext(default);
         //}
 
-        public PlatTenantDbContext(TenantInfo tenantInfo)
+        public TenantDbContext(TenantInfo tenantInfo)
         {
-            _tenantInfp = tenantInfo;
+            _tenantInfo = tenantInfo;
         }
 
-        public static PlatTenantDbContext CreatePlatTenantDbContext(TenantInfo tenantInfo)
+        public static TenantDbContext CreateTenantDbContext(TenantInfo tenantInfo)
         {
-            return new PlatTenantDbContext(tenantInfo);
+            return new TenantDbContext(tenantInfo);
         }
 
         public DbSet<SomeTenantData> SomeTenantData { get; set; }
@@ -36,7 +35,7 @@ namespace PlatTraining.Data.TenantUnit
         {
             var tenant88 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=88tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Pooling=true;Connection Lifetime=500";
             var tenant99 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=99tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Pooling=true;Connection Lifetime=500";
-            optionsBuilder.UseSqlServer(tenant88);
+            optionsBuilder.UseSqlServer(_tenantInfo.ConnectionString);
             base.OnConfiguring(optionsBuilder);
         }
 

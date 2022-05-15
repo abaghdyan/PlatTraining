@@ -8,9 +8,9 @@ namespace PlatTraining.Data.Services
     public class TenantResolver : ITenantResolver
     {
         private readonly TenantInfo _tenantInfo;
-        private readonly PlatMasterDbContext _masterDbContext;
+        private readonly MasterDbContext _masterDbContext;
 
-        public TenantResolver(TenantInfo tenantInfo, PlatMasterDbContext masterDbContext)
+        public TenantResolver(TenantInfo tenantInfo, MasterDbContext masterDbContext)
         {
             _tenantInfo = tenantInfo;
             _masterDbContext = masterDbContext;
