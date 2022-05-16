@@ -12,7 +12,7 @@ namespace PlatTraining.Data.Models
         {
             TenantId = string.Empty;
             TenantName = string.Empty;
-            ConnectionString = Guid.NewGuid().ToString();
+            ConnectionString = nameof(string.Empty);
         }
 
         internal TenantInfo InitiateForScope(string tenantId, string tenantName, SqlConnectionStringBuilder connectionBuilder)

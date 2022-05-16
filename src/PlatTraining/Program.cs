@@ -18,12 +18,11 @@ builder.Services.AddHealthChecks()
     .AddRedis(builder.Configuration.GetConnectionString("Redis"));
 
 builder.Services.AddApplicationOptions(builder.Configuration);
-builder.Services.AddMultitenancy();
+builder.Services.AddMultiTenantDbContext();
 builder.Services.AddAuthenticationLayer(builder.Configuration);
 builder.Services.AddSwaggerLayer();
 
 builder.Services.AddMasterDbContext(builder.Configuration.GetConnectionString("MasterDb"));
-builder.Services.AddTenantDbContext();
 builder.Services.AddServices();
 
 var app = builder.Build();
