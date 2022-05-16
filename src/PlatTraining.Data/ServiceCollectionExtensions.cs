@@ -15,12 +15,12 @@ namespace PlatTraining
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddMultiTenantDbContext(this IServiceCollection services)
+        public static IServiceCollection AddMultitenancy(this IServiceCollection services)
         {
             services
                 .AddScoped<TenantInfo>()
                 .AddScoped<ITenantResolver, TenantResolver>()
-                .AddDbContext<TenantDbContext>((provider, cfg) => 
+                .AddDbContext<TenantDbContext>((provider, cfg) =>
                 {
                     var tenantInfo = provider.GetRequiredService<TenantInfo>();
                     cfg.UseSqlServer(tenantInfo.ConnectionString);
@@ -29,49 +29,6 @@ namespace PlatTraining
             return services;
         }
 
-        //public static IServiceCollection AddMultitenancy(this IServiceCollection services)
-        //{
-        //    services.AddScoped<TenantInfo>();
-        //    services.AddScoped<ITenantResolver, TenantResolver>();
-
-        //    return services;
-        //}
-
-        //public static IServiceCollection AddTenantDbContext(this IServiceCollection services)
-        //{
-        //    //var tenant88 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=88tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //    //var tenant99 = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=99tenant;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //    //
-        //    //services.AddDbContext<PlatTenantDbContext>(options =>
-        //    //{
-        //    //    options.UseSqlServer(tenant88);
-        //    //});
-
-        //    services.AddDbContext<TenantDbContext>();
-
-        //    return services;
-        //}
-
-        //public static async Task MigrateTenantDbContextAsync(this IServiceProvider provider)
-        //{
-        //    using var serviceScope = provider.CreateScope();
-        //    var masterDbContext = serviceScope.ServiceProvider.GetRequiredService<MasterDbContext>();
-        //    var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<TenantDbContext>>();
-        //    var migrationTime = new Stopwatch();
-        //    logger.LogInformation("Migration started");
-        //    migrationTime.Start();
-        //    var tenants = await masterDbContext.Tenants.Include(t => t.TenantConnectionInfo).ToListAsync();
-        //    foreach (var tenant in tenants)
-        //    {
-        //        var tenantInfo = new TenantInfo().InitiateForScope(tenant.Id, tenant.Name,
-        //            ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo));
-        //        //var tenantDbContext = TenantDbContext.CreateTenantDbContext(tenantInfo);
-        //        var tenantDbContext = serviceScope.ServiceProvider.GetRequiredService<TenantDbContext>();
-        //        await tenantDbContext.Database.MigrateAsync();
-        //    }
-        //    migrationTime.Stop();
-        //    logger.LogInformation($"Migrating finished", new { Duration = migrationTime.ElapsedMilliseconds });
-        //}
         public static async Task MigrateTenantDbContextAsync(this IServiceProvider provider)
         {
             using var serviceScope = provider.CreateScope();
@@ -154,14 +111,11 @@ namespace PlatTraining
 
         private static TenantDbContext GetTenantDbContext(this IServiceProvider provider, Tenant tenant)
         {
-            provider.GetRequiredService<TenantInfo>()
-                    .InitiateForScope(
-                        tenant.Id,
-                        tenant.Name,
-                        ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo)
-                    );
+            var contextOptions = new DbContextOptionsBuilder<TenantDbContext>()
+                            .UseSqlServer(ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo).ToString())
+                            .Options;
 
-            return provider.GetRequiredService<TenantDbContext>();
+            return new TenantDbContext(contextOptions);
         }
     }
 }
