@@ -111,11 +111,16 @@ namespace PlatTraining
 
         private static TenantDbContext GetTenantDbContext(this IServiceProvider provider, Tenant tenant)
         {
-            var contextOptions = new DbContextOptionsBuilder<TenantDbContext>()
-                            .UseSqlServer(ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo).ToString())
-                            .Options;
+            var serviceProvider = provider.CreateScope().ServiceProvider;
 
-            return new TenantDbContext(contextOptions);
+            serviceProvider.GetRequiredService<TenantInfo>()
+                .InitiateForScope(
+                    tenant.Id,
+                    tenant.Name,
+                    ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo)
+                );
+
+            return serviceProvider.GetRequiredService<TenantDbContext>();
         }
     }
 }
