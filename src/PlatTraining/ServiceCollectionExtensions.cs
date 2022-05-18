@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PlatTraining.Data.Options;
 using PlatTraining.Services.Options;
 using System.Text;
 
@@ -18,6 +19,8 @@ namespace PlatTraining
                 o.AccessTokenDurationInMinutes = Convert.ToInt32(section[nameof(JwtTokenOptions.AccessTokenDurationInMinutes)]);
                 o.AccessTokenDurationInMinutesRememberMe = Convert.ToInt32(section[nameof(JwtTokenOptions.AccessTokenDurationInMinutesRememberMe)]);
             });
+
+            services.Configure<EncryptionOptions>(configuration.GetSection(EncryptionOptions.Section));
 
             return services;
         }

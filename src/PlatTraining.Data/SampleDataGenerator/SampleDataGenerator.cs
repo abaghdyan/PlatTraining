@@ -1,10 +1,11 @@
-﻿using PlatTraining.Data.MasterUnit.Entities;
+﻿using PlatTraining.Data.Helpers;
+using PlatTraining.Data.MasterUnit.Entities;
 
 namespace PlatTraining.Data.SampleDataGenerator
 {
     public static class SampleDataGenerator
     {
-        public static List<Tenant> GenerateTenants()
+        public static List<Tenant> GenerateTenants(string encryptionKey)
         {
             return new List<Tenant>()
             {
@@ -21,12 +22,14 @@ namespace PlatTraining.Data.SampleDataGenerator
                     {
                         Id = "88",
                         TenantId = "88",
-                        DataSource = "(localdb)\\MSSQLLocalDB",
-                        InitialCatalog = "88tenant",
+                        DataSource = SecurityHelper.Encrypt(encryptionKey, "(localdb)\\MSSQLLocalDB"),
+                        InitialCatalog = SecurityHelper.Encrypt(encryptionKey, "88tenant"),
+                        UserId = SecurityHelper.Encrypt(encryptionKey, ""),
+                        Password = SecurityHelper.Encrypt(encryptionKey, ""),
                         LoadBalanceTimeoutInSec = 500,
                         Pooling = true,
                         MinPoolSize = 0,
-                        MaxPoolSize = 100,
+                        MaxPoolSize = 100
                     }
                 },
                 new Tenant()
@@ -42,8 +45,10 @@ namespace PlatTraining.Data.SampleDataGenerator
                     {
                         Id = "99",
                         TenantId = "99",
-                        DataSource = "(localdb)\\MSSQLLocalDB",
-                        InitialCatalog = "99tenant",
+                        DataSource = SecurityHelper.Encrypt(encryptionKey, "(localdb)\\MSSQLLocalDB"),
+                        InitialCatalog = SecurityHelper.Encrypt(encryptionKey, "99tenant"),
+                        UserId = SecurityHelper.Encrypt(encryptionKey, ""),
+                        Password = SecurityHelper.Encrypt(encryptionKey, ""),
                         LoadBalanceTimeoutInSec = 500,
                         Pooling = true,
                         MinPoolSize = 0,

@@ -11,7 +11,7 @@ using PlatTraining.Data.TenantUnit;
 namespace PlatTraining.Data.TenantUnit.Infrastructure.Migrations
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20220515190556_Initial")]
+    [Migration("20220518213358_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

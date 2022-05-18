@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PlatTraining.Data.Helpers;
 using PlatTraining.Data.MasterUnit;
 using PlatTraining.Data.MasterUnit.Entities;
 using PlatTraining.Data.Models;
+using PlatTraining.Data.Options;
 using PlatTraining.Data.SampleDataGenerator;
 using PlatTraining.Data.Services;
 using PlatTraining.Data.TenantUnit;
@@ -67,15 +69,17 @@ namespace PlatTraining
             migrationTime.Stop();
             logger.LogInformation($"Migrating finished", new { Duration = migrationTime.ElapsedMilliseconds });
         }
+
         public static async Task AddMasterSampleDataAsync(this IServiceProvider provider)
         {
             try
             {
+                var encryptionOptions = provider.GetRequiredService<IOptions<EncryptionOptions>>();
                 using var serviceScope = provider.CreateScope();
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<MasterDbContext>();
                 if (!await dbContext.Tenants.AnyAsync())
                 {
-                    dbContext.Tenants.AddRange(SampleDataGenerator.GenerateTenants());
+                    dbContext.Tenants.AddRange(SampleDataGenerator.GenerateTenants(encryptionOptions.Value.Key));
                     await dbContext.SaveChangesAsync();
                 }
             }
@@ -112,12 +116,14 @@ namespace PlatTraining
         private static TenantDbContext GetTenantDbContext(this IServiceProvider provider, Tenant tenant)
         {
             var serviceProvider = provider.CreateScope().ServiceProvider;
+            var encryptionOptions = serviceProvider.GetRequiredService<IOptions<EncryptionOptions>>();
+            var connectionBuilder = ConnectionHelper.GetConnectionBuilder(encryptionOptions.Value.Key, tenant.TenantConnectionInfo);
 
             serviceProvider.GetRequiredService<TenantInfo>()
                 .InitiateForScope(
                     tenant.Id,
                     tenant.Name,
-                    ConnectionHelper.GetConnectionBuilder(tenant.TenantConnectionInfo)
+                    connectionBuilder
                 );
 
             return serviceProvider.GetRequiredService<TenantDbContext>();
