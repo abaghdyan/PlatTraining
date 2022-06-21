@@ -8,8 +8,30 @@ namespace PlatTraining.Data.TenantUnit.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "next");
+
+            migrationBuilder.EnsureSchema(
+                name: "some");
+
+            migrationBuilder.CreateTable(
+                name: "NextTenantData",
+                schema: "next",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Next = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsEditable = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NextTenantData", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "SomeTenantData",
+                schema: "some",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -28,7 +50,12 @@ namespace PlatTraining.Data.TenantUnit.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SomeTenantData");
+                name: "NextTenantData",
+                schema: "next");
+
+            migrationBuilder.DropTable(
+                name: "SomeTenantData",
+                schema: "some");
         }
     }
 }

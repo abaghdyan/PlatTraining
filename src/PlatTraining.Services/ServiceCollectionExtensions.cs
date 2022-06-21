@@ -8,6 +8,7 @@ namespace PlatTraining.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+            services.AddScoped<INextTenantDataService, NextTenantDataService>();
             services.AddScoped<ISomeTenantDataService, SomeTenantDataService>();
             services.AddScoped<ITokenService, TokenService>();
 

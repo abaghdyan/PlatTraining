@@ -106,6 +106,14 @@ namespace PlatTraining
                         });
                         await tenantDbContext.SaveChangesAsync();
                     }
+                    if (!await tenantDbContext.NextTenantData.AnyAsync())
+                    {
+                        tenantDbContext.NextTenantData.Add(new NextTenantData
+                        {
+                            Next = $"Next__{tenant.Name}" + tenant.Data
+                        });
+                        await tenantDbContext.SaveChangesAsync();
+                    }
                 }
                 catch (Exception)
                 {

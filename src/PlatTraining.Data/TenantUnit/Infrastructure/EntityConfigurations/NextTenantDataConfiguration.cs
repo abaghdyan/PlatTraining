@@ -4,14 +4,14 @@ using PlatTraining.Data.TenantUnit.Entities;
 
 namespace PlatTraining.Data.TenantUnit.Infrastructure.EntityConfigurations
 {
-    internal class SomeTenantDataConfiguration : IEntityTypeConfiguration<SomeTenantData>
+    internal class NextTenantDataConfiguration : IEntityTypeConfiguration<NextTenantData>
     {
-        public void Configure(EntityTypeBuilder<SomeTenantData> builder)
+        public void Configure(EntityTypeBuilder<NextTenantData> builder)
         {
             builder.HasKey(ar => ar.Id)
-                    .HasName("PK_SomeTenantData");
+                    .HasName("PK_NextTenantData");
 
-            builder.ToTable(nameof(SomeTenantData), "some");
+            builder.ToTable(nameof(NextTenantData), "next");
         }
     }
 }
