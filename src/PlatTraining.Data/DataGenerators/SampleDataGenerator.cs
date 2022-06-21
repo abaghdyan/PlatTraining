@@ -1,7 +1,7 @@
 ﻿using PlatTraining.Data.Helpers;
 using PlatTraining.Data.MasterUnit.Entities;
 
-namespace PlatTraining.Data.SampleDataGenerator
+namespace PlatTraining.Data.DataGenerators
 {
     public static class SampleDataGenerator
     {

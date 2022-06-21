@@ -1,6 +1,7 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using PlatTraining;
+using PlatTraining.Data;
 using PlatTraining.Middlewares;
 using PlatTraining.Services;
 

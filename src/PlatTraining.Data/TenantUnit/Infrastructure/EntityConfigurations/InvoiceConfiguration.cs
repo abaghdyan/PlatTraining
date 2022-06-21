@@ -4,12 +4,12 @@ using PlatTraining.Data.TenantUnit.Entities;
 
 namespace PlatTraining.Data.TenantUnit.Infrastructure.EntityConfigurations
 {
-    internal class SomeTenantDataConfiguration : IEntityTypeConfiguration<SomeTenantData>
+    internal class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
     {
-        public void Configure(EntityTypeBuilder<SomeTenantData> builder)
+        public void Configure(EntityTypeBuilder<Invoice> builder)
         {
             builder.HasKey(ar => ar.Id)
-                    .HasName("PK_SomeTenantData");
+                    .HasName("PK_Invoice");
         }
     }
 }

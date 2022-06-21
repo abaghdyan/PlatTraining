@@ -10,11 +10,13 @@ namespace PlatTraining.Data.TenantUnit
             : base(options)
         { }
 
-        public DbSet<SomeTenantData> SomeTenantData { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<EmailHistory> EmailHistory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new SomeTenantDataConfiguration());
+            modelBuilder.ApplyConfiguration(new InvoiceConfiguration());
+            modelBuilder.ApplyConfiguration(new EmailHistoryConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

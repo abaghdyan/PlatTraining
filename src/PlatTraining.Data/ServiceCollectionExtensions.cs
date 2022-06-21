@@ -2,18 +2,17 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PlatTraining.Data.DataGenerators;
 using PlatTraining.Data.Helpers;
 using PlatTraining.Data.MasterUnit;
 using PlatTraining.Data.MasterUnit.Entities;
 using PlatTraining.Data.Models;
 using PlatTraining.Data.Options;
-using PlatTraining.Data.SampleDataGenerator;
 using PlatTraining.Data.Services;
 using PlatTraining.Data.TenantUnit;
-using PlatTraining.Data.TenantUnit.Entities;
 using System.Diagnostics;
 
-namespace PlatTraining
+namespace PlatTraining.Data
 {
     public static class ServiceCollectionExtensions
     {

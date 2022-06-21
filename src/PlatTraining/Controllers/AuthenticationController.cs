@@ -4,10 +4,9 @@ using PlatTraining.Services.Contracts;
 
 namespace PlatTraining.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController : MasterControllerBase
     {
         private readonly ITokenService _tokenService;
 

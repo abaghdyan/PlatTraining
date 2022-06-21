@@ -1,14 +1,25 @@
-﻿using System.Data.SqlClient;
+﻿
+using Microsoft.AspNetCore.Mvc;
+using PlatTraining.Controllers;
+using System.Reflection;
 
-SqlConnectionStringBuilder connString1Builder;
-connString1Builder = new SqlConnectionStringBuilder();
-connString1Builder.DataSource = "tcp:m3gdulejm4.database.windows.net,1433";
-connString1Builder.InitialCatalog = "ReadyToLunch";
-connString1Builder.Encrypt = true;
-connString1Builder.TrustServerCertificate = false;
-connString1Builder.UserID = "lipidfresh@m3gdulejm4";
-connString1Builder.Password = "Diva4dog";
+var type = typeof(ControllerBase);
 
-var test = connString1Builder.ToString();
-Console.WriteLine();
+var excludedTypes = new Type[]
+{
+                typeof(TenantControllerBase),
+                typeof(AuthenticationController)
+};
+
+var assembly = Assembly.GetAssembly(typeof(TenantControllerBase));
+var types = assembly.GetTypes()
+    .Where(t => !excludedTypes.Contains(t) && t.BaseType == type);
+
+
 Console.ReadLine();
+
+
+public class TotalBase { }
+public class MyBase : TotalBase { }
+public class My : MyBase { }
+public class Your : TotalBase { }

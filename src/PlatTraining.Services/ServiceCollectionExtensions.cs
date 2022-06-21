@@ -8,8 +8,11 @@ namespace PlatTraining.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<ISomeTenantDataService, SomeTenantDataService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IEmailHistoryService, EmailHistoryService>();
             services.AddScoped<ITokenService, TokenService>();
+
+            services.AddScoped<IGolbalUserService, GolbalUserService>();
 
             return services;
         }
