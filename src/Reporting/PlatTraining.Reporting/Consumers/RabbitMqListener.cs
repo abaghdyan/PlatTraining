@@ -55,7 +55,7 @@ namespace PlatTraining.Reporting.Consumers
                     Console.WriteLine(ex.Message);
                 }
             };
-            _channel.BasicConsume(QueueName, true, consumer);
+            _channel.BasicConsume(QueueName, false, consumer);
 
             return Task.CompletedTask;
         }
